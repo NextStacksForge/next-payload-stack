@@ -19,7 +19,7 @@ jobs:
 
     - name: Create Sentry release
       env:
-        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        SENTRY_AUTH_TOKEN : 07748b443519684bbc342d0fd7dfeb912516418538d46874ebd197fa2321da9f
         SENTRY_ORG: loutresan
         SENTRY_PROJECT: starter-next-payload
       run: |

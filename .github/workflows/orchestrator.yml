@@ -16,6 +16,7 @@ jobs:
       
       - name: Install Sentry CLI
         run: curl -sL https://sentry.io/get-cli/ | bash
+        
       
       - name: Create Sentry release
         env:
