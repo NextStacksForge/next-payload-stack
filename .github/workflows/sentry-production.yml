@@ -3,8 +3,8 @@ name: Sentry Release
 on:
   push:
     branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  # pull_request:
+  #   branches: [ main, master ]
 
 jobs:
   generate_git_tag:
