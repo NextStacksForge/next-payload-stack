@@ -1,0 +1,29 @@
+name: Deploy and Release
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  deploy-and-release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    # Ajoutez ici vos étapes de déploiement
+
+    - name: Install Sentry CLI
+      run: curl -sL https://sentry.io/get-cli/ | bash
+
+    - name: Create Sentry release
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        SENTRY_ORG: loutresan
+        SENTRY_PROJECT: starter-next-payload
+      run: |
+        VERSION=$(sentry-cli releases propose-version)
+        sentry-cli releases new "$VERSION"
+        sentry-cli releases set-commits "$VERSION" --auto
+        sentry-cli releases finalize "$VERSION"
