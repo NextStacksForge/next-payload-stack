@@ -24,7 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
       
-      - name: Echo New Tag
+      - name: Echo New Tag Version
         run: |
           echo "The next tag version will be - ${{ steps.taggerFinal.outputs.new_tag }}"
 
