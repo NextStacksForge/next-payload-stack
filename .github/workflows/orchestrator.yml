@@ -33,7 +33,7 @@ jobs:
 
 
   final-checks:
-    needs: [trigger-web-app-workflows, trigger-payload-app-workflows]
+    needs: [trigger-web-app-workflows]
     runs-on: ubuntu-latest
     steps:
       - name: Final Project Check
