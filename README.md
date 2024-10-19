@@ -1,94 +1,63 @@
-# Next-Payload Enterprise Stack
+# GitHub Actions Workflows
 
-## Vue d'ensemble
+Ce projet utilise GitHub Actions pour automatiser les processus de release et de déploiement. Nous avons deux workflows principaux : un pour la production et un pour le développement.
 
-Next-Payload Enterprise Stack est une solution complète et robuste pour le développement d'applications web modernes. Ce projet combine la puissance de Next.js pour le frontend et Payload CMS pour la gestion de contenu, offrant une base solide pour des applications d'entreprise évolutives.
+## Workflow de Production
 
-## Caractéristiques
+Fichier : `.github/workflows/production-release.yml`
 
-- **Frontend Next.js** : Utilise l'App Router pour un routage optimisé
-- **Backend Payload CMS** : CMS headless puissant et flexible
-- **TypeScript** : Typage statique pour un code plus sûr et maintenable
-- **Tailwind CSS** : Utilitaire CSS pour un design rapide et réactif
-- **Stripe** : Intégration pour les paiements en ligne
-- **Vercel** : Configuration de déploiement optimisée
-- **Tests** : Vitest, Playwright, et Jest pour des tests complets
-- **Storybook** : Documentation des composants et développement isolé
-- **Sentry** : Surveillance des erreurs en production
-- **State Management** : Zustand pour une gestion d'état simple et efficace
-- **Base de données** : Intégration avec Supabase
-- **Emails** : Envoi d'emails avec Resend
-- **Animations** : Framer Motion et Lottie pour des animations fluides
-- **Et plus encore** : ESLint, Axios, class-variance-authority, etc.
+Ce workflow est déclenché lors des pushes et des pull requests sur les branches `main` et `master`.
 
-## Prérequis
+### Étapes :
 
-- Node.js (version 18 ou supérieure)
-- npm ou yarn
-- Git
+1. **Génération de tag Git** :
+   - Crée un nouveau tag basé sur les commits récents.
+   - Utilise l'action `anothrNick/github-tag-action`.
 
-## Installation
+2. **Création de release GitHub** :
+   - Crée une nouvelle release GitHub basée sur le tag généré.
+   - Utilise l'action `ncipollo/release-action`.
 
-1. Clonez le repository :
-   ```
-   git clone https://github.com/NextStacksForge/next-payload-stack.git
-   cd next-payload-enterprise-stack
-   ```
+3. **Création de release Sentry** :
+   - Crée une nouvelle release dans Sentry pour l'environnement de production.
+   - Utilise l'action officielle Sentry `getsentry/action-release`.
 
-2. Installez les dépendances :
-   ```
-   npm install
-   ```
-   ou
-   ```
-   yarn install
-   ```
+## Workflow de Développement
 
-3. Configurez les variables d'environnement :
-   Copiez le fichier `.env.example` en `.env` et remplissez les variables nécessaires.
+Fichier : `.github/workflows/devloppement-release.yml`
 
-4. Lancez le projet en mode développement :
-   ```
-   npm run dev
-   ```
-   ou
-   ```
-   yarn dev
-   ```
+Ce workflow est déclenché uniquement lors des pushes sur la branche `devs`.
 
-## Structure du projet
+### Étapes :
 
-```
-next-payload-enterprise-stack/
-├── apps/
-│   ├── web/                      # Application web principale Next.js
-│   └── payload/                  # Application Payload CMS
-├── packages/                     # Packages partagés (si nécessaire)
-├── .github/                      # Workflows GitHub Actions
-├── docker-compose.yml            # Configuration Docker pour le développement
-└── README.md                     # Ce fichier
-```
+1. **Génération de tag de développement** :
+   - Crée un nouveau tag spécifique au développement (par exemple, v1.0.0-dev.1).
+   - Utilise l'action `anothrNick/github-tag-action` avec des paramètres spécifiques au développement.
 
-## Scripts disponibles
+2. **Création de release Sentry pour le développement** :
+   - Crée une nouvelle release dans Sentry pour l'environnement de développement.
+   - Utilise l'action officielle Sentry `getsentry/action-release`.
 
-- `npm run dev` : Lance le projet en mode développement
-- `npm run build` : Compile le projet pour la production
-- `npm run start` : Démarre le projet en mode production
-- `npm run test` : Exécute les tests
-- `npm run storybook` : Lance Storybook pour le développement de composants
+## Configuration requise
 
-## Contribution
+Pour que ces workflows fonctionnent correctement, assurez-vous d'avoir configuré les secrets suivants dans les paramètres de votre repository GitHub :
 
-Les contributions sont les bienvenues ! Veuillez consulter notre guide de contribution pour plus de détails.
+- `PAT` : Personal Access Token avec les permissions nécessaires pour créer des tags et des releases.
+- `SENTRY_AUTH_TOKEN` : Token d'authentification pour Sentry.
+- `SENTRY_ORG` : Nom de votre organisation Sentry.
+- `SENTRY_PROJECT` : Nom de votre projet Sentry.
 
-## Licence
+## Utilisation
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+Ces workflows s'exécutent automatiquement selon les conditions définies (pushes sur certaines branches). Aucune action manuelle n'est nécessaire pour les déclencher.
 
-## Support
+Pour visualiser les exécutions des workflows :
+1. Allez dans l'onglet "Actions" de votre repository GitHub.
+2. Sélectionnez le workflow que vous souhaitez examiner.
+3. Vous verrez l'historique des exécutions et pourrez consulter les logs pour chaque run.
 
-Si vous rencontrez des problèmes ou avez des questions, n'hésitez pas à ouvrir une issue sur GitHub.
+## Personnalisation
 
----
+Si vous avez besoin de modifier ces workflows, vous pouvez éditer les fichiers YAML correspondants dans le répertoire `.github/workflows/`.
 
-Développé avec ❤️ par l'équipe NextStacksForge
+Pour toute question ou problème concernant ces workflows, veuillez ouvrir une issue dans ce repository.
