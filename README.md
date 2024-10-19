@@ -31,7 +31,7 @@ Next-Payload Enterprise Stack est une solution complète et robuste pour le dév
 
 1. Clonez le repository :
    ```
-   git clone https://github.com/NextStacksForge/next-payload-enterprise-stack.git
+   git clone https://github.com/NextStacksForge/next-payload-stack.git
    cd next-payload-enterprise-stack
    ```
 
