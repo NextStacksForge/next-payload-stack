@@ -7,29 +7,15 @@ on:
     branches: [main, master]
 
 jobs:
-  trigger-web-app-workflows:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Trigger Web App Playwright Tests
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
-        with:
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow_file_name: ./web-app/.github/workflows/playwright.yml
-      
-      - name: Trigger Web App Sentry Release
-        uses: convictional/trigger-workflow-and-wait@v1.6.1
-        with:
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow_file_name: ./web-app/.github/workflows/sentry.yml
+  web-app-tests:
+    uses: ./.github/workflows/playwright.yml
+
+  web-app-sentry-release:
+    needs: web-app-tests
+    uses: ./.github/workflows/sentry.yml
 
   final-checks:
-    needs: [trigger-web-app-workflows]
+    needs: [web-app-tests, web-app-sentry-release]
     runs-on: ubuntu-latest
     steps:
       - name: Final Project Check
