@@ -11,26 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - name: Trigger Web App Playwright Tests
         uses: convictional/trigger-workflow-and-wait@v1.6.1
         with:
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow_file_name: playwright.yml
-          ref: ${{ github.ref }}
-          path: web-app/.github/workflows/playwright.yml
+          workflow_file_name: web-app/.github/workflows/playwright.yml
       
       - name: Trigger Web App Sentry Release
         uses: convictional/trigger-workflow-and-wait@v1.6.1
         with:
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow_file_name: sentry.yml
-          ref: ${{ github.ref }}
-          path: web-app/.github/workflows/sentry.yml
-
+          workflow_file_name: web-app/.github/workflows/sentry.yml
 
   final-checks:
     needs: [trigger-web-app-workflows]
