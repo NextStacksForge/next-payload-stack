@@ -11,42 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:aname: Workflow Orchestrator
-
-on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
-
-jobs:
-  create-sentry-release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-      
-      - name: Load environment variables
-        run: |
-          if [ -f .env ]; then
-            export $(cat .env | grep -v '#' | awk '/=/ {print $1}')
-          else
-            echo ".env file not found"
-            exit 1
-          fi
-      
-      - name: Install Sentry CLI
-        run: curl -sL https://sentry.io/get-cli/ | bash
-      
-      - name: Create Sentry release
-        run: |
-          VERSION=$(sentry-cli releases propose-version)
-          echo "Release version: $VERSION"
-          
-          sentry-cli releases new "$VERSION"
-          sentry-cli releases set-commits "$VERSION" --auto
-          sentry-cli releases finalize "$VERSION"
           fetch-depth: 0
       
       - name: Install Sentry CLI
