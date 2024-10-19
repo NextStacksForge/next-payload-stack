@@ -8,12 +8,12 @@ on:
 
 jobs:
   web-app-tests:
-    uses: ./web-app/.github/workflows/playwright.yml
+    uses: ./web-app/.github/workflows/playwright.yml@main
 
   web-app-sentry-release:
     needs: web-app-tests
-    uses: ./web-app/.github/workflows/sentry.yml
-
+    uses: ./web-app/.github/workflows/sentry.yml@main
+           
   final-checks:
     needs: [web-app-tests, web-app-sentry-release]
     runs-on: ubuntu-latest
