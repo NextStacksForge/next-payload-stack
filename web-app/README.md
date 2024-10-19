@@ -26,6 +26,7 @@ Next-Payload Enterprise Stack est une solution complète et robuste pour le dév
 - Node.js (version 18 ou supérieure)
 - npm ou yarn
 - Git
+- Bun (After)
 
 ## Installation
 
