@@ -18,7 +18,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow_file_name: web-app/.github/workflows/playwright.yml
+          workflow_file_name: ./web-app/.github/workflows/playwright.yml
       
       - name: Trigger Web App Sentry Release
         uses: convictional/trigger-workflow-and-wait@v1.6.1
@@ -26,7 +26,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow_file_name: web-app/.github/workflows/sentry.yml
+          workflow_file_name: ./web-app/.github/workflows/sentry.yml
 
   final-checks:
     needs: [trigger-web-app-workflows]
