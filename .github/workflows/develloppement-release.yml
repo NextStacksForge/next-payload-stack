@@ -11,7 +11,7 @@ jobs:
     outputs:
       new_tag: ${{ steps.taggerDev.outputs.new_tag }}
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -31,7 +31,7 @@ jobs:
     needs: generate_dev_tag
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -81,7 +81,43 @@ jobs:
           done
           
           echo "EOF" >> $GITHUB_OUTPUT
-    
+
+      - name: Update CHANGELOG
+        run: |
+          # Ensure CHANGELOG.md exists
+          touch CHANGELOG.md
+          
+          # Prepare new content
+          NEW_CONTENT="## [${{ needs.generate_dev_tag.outputs.new_tag }}] - $(date +%Y-%m-%d)\n\n"
+          
+          NEW_CONTENT+="### Bug Fixes\n"
+          BUG_FIXES=$(git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"- %s" | grep -E "^[Ff]ix:")
+          if [ ! -z "$BUG_FIXES" ]; then
+            NEW_CONTENT+="$BUG_FIXES\n\n"
+          else
+            NEW_CONTENT+="No bug fixes in this release.\n\n"
+          fi
+          
+          NEW_CONTENT+="### Features\n"
+          FEATURES=$(git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"- %s" | grep -E "^[Ff]eat:")
+          if [ ! -z "$FEATURES" ]; then
+            NEW_CONTENT+="$FEATURES\n\n"
+          else
+            NEW_CONTENT+="No new features in this release.\n\n"
+          fi
+          
+          # Insert new content at the beginning of the file, after the first line
+          sed -i '1r /dev/stdin' CHANGELOG.md <<< "$NEW_CONTENT"
+          
+          # Configure git
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          
+          # Commit and push changes
+          git add CHANGELOG.md
+          git commit -m "Update CHANGELOG for ${{ needs.generate_dev_tag.outputs.new_tag }}"
+          git push
+
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1.10.0
         with:
@@ -91,12 +127,12 @@ jobs:
           draft: false
           prerelease: true
           token: ${{ secrets.PAT }}
-                  
+
   create_dev_sentry_release:
     needs: [generate_dev_tag, create_github_release]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
