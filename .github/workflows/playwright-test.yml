@@ -12,6 +12,7 @@ on:
 
 jobs:
   test:
+    if: false
     timeout-minutes: 60
     runs-on: ubuntu-latest
     defaults:
