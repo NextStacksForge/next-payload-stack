@@ -2,7 +2,7 @@ name: Integration Test
 
 on:
   push:
-    branches: [main, devs]
+    branches: [main, master]
     paths:
       - 'web-app/**'
   pull_request:
