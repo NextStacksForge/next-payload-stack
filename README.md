@@ -48,21 +48,25 @@ NextStacksForge/
 Notre projet est divisé en deux applications principales :
 
 1. **Application Payload CMS** (dans `payload-app/`) :
-   - Gère le contenu et les données de l'application
-   - Fournit une API RESTful pour l'application frontend
-   - Gère l'authentification et les autorisations pour l'acces a payload-app
-
+   - Gère le contenu pour les pages statiques de l'application (SSG)
+   - Fournit une interface d'administration pour la gestion du contenu
+   - Permet la création et l'édition de contenu qui sera utilisé pour générer des pages statiques
+   - N'agit pas comme un backend traditionnel pour l'application web
 
 2. **Application Web Next.js** (dans `web-app/`) :
    - Utilise l'App Router de Next.js pour un routage optimisé
    - Interface utilisateur principale de l'application
    - Intègre Tailwind CSS pour le styling
-   - Communique avec le backend Payload CMS via API
+   - Utilise le contenu géré par Payload CMS pour générer des pages statiques (SSG)
+   - Backend principalement géré avec Supabase et les fonctionnalités de Next.js
    - Inclut Storybook pour le développement de composants
    - Configuration pour les tests avec Playwright
-   - Backend gérée avec Supabase
 
-Cette structure permet une séparation claire des responsabilités entre le frontend et le backend, tout en permettant une intégration étroite entre les deux parties de l'application.
+Cette structure permet une séparation claire des responsabilités :
+- Payload CMS est utilisé exclusivement pour la gestion du contenu des pages statiques.
+- Le backend de l'application est principalement géré par Supabase et les fonctionnalités de Next.js.
+- L'application web Next.js consomme le contenu de Payload CMS lors du build pour générer des pages statiques, tout en utilisant Supabase pour les fonctionnalités dynamiques et le stockage des données.
+
 
 # GitHub Actions Workflows
 
