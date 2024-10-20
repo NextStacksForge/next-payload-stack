@@ -14,51 +14,49 @@ jobs:
   unit-test:
     runs-on: ubuntu-latest
     defaults:
-        run:
-          working-directory: ./web-app
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with: 
-        node-version: 20
-        cache: 'npm'
-    - run: npm ci
-    - run: npm test
-
-  build:
-    
-    runs-on: ubuntu-latest
-    defaults:
-        run:
-          working-directory: ./web-app
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with: 
-        node-version: 20
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build
-
-  coverage:
-    runs-on: ubuntu-latest
-    defaults:
-        run:
-          working-directory: ./web-app
+      run:
+        working-directory: ./web-app
     steps:
       - uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
-        with: 
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm test
+
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web-app
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+
+  coverage:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web-app
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
           node-version: 20
           cache: 'npm'
       - run: npm ci
       - run: npm test -- --coverage
-      - uses:  actions/upload-artifact@v3
-        name: Active Coverage Report
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v3
         with:
           name: coverage-report
-          path: coverage
-      
+          path: web-app/coverage
