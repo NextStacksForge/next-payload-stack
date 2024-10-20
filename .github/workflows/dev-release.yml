@@ -1,4 +1,4 @@
-name: Development Sentry Release
+name: Sentry Release Development
 
 on:
   push:
