@@ -8,6 +8,6 @@ on:
 
 jobs:
   web_app_tests:
-    uses: NEXTSTACKSFORGE/web-app/.github/workflows/playwright.yml@main
+    uses: ./.github/workflows/web-app-playwright.yml@main
     with:
       working-directory: './web-app'
