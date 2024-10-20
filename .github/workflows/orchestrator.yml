@@ -7,9 +7,8 @@ on:
     branches: [ main, master ]
 
 jobs:
-  web_app_tests:
-    uses: ./web-app/.github/workflows/playwright.yml@main
+  call_web_app_workflow:
+    uses: ./../web-app/.github/workflows/playwright.yml@main
     with:
-      working-directory: './web-app'
+      working-directory: './../web-app'
 
-  # Autres jobs si nécessaire
