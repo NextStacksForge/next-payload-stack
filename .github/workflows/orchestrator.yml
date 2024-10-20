@@ -7,8 +7,7 @@ on:
     branches: [ main, master ]
 
 jobs:
-  call_web_app_workflow:
-    uses: ./../web-app/.github/workflows/playwright.yml@main
+  web_app_tests:
+    uses: NEXTSTACKSFORGE/web-app/.github/workflows/playwright.yml@main
     with:
-      working-directory: './../web-app'
-
+      working-directory: './web-app'
