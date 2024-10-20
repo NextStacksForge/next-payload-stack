@@ -7,7 +7,7 @@ Next-Payload Enterprise Stack est une solution complète et robuste pour le dév
 ## Caractéristiques
 
 - **Frontend Next.js** : Utilise l'App Router pour un routage optimisé
-- **Backend Payload CMS** : CMS headless puissant et flexible
+- **Payload CMS** : CMS headless puissant et flexible 
 - **TypeScript** : Typage statique pour un code plus sûr et maintenable
 - **Tailwind CSS** : Utilitaire CSS pour un design rapide et réactif
 - **Stripe** : Intégration pour les paiements en ligne
@@ -17,7 +17,6 @@ Next-Payload Enterprise Stack est une solution complète et robuste pour le dév
 - **Sentry** : Surveillance des erreurs en production
 - **State Management** : Zustand pour une gestion d'état simple et efficace
 - **Base de données** : Intégration avec Supabase
-- **Emails** : Envoi d'emails avec Resend
 - **Animations** : Framer Motion et Lottie pour des animations fluides
 - **Et plus encore** : ESLint, Axios, class-variance-authority, etc.
 
@@ -33,8 +32,8 @@ Next-Payload Enterprise Stack est une solution complète et robuste pour le dév
 1. Clonez le repository :
 
    ```
-   git clone https://github.com/NextStacksForge/next-payload-enterprise-stack.git
-   cd next-payload-enterprise-stack
+   git clone https://github.com/NextStacksForge/next-payload-stack.git
+   cd next-payload-stack
    ```
 
 2. Installez les dépendances :
@@ -60,19 +59,6 @@ Next-Payload Enterprise Stack est une solution complète et robuste pour le dév
    ```
    yarn dev
    ```
-
-## Structure du projet
-
-```
-next-payload-enterprise-stack/
-├── apps/
-│   ├── web/                      # Application web principale Next.js
-│   └── payload/                  # Application Payload CMS
-├── packages/                     # Packages partagés (si nécessaire)
-├── .github/                      # Workflows GitHub Actions
-├── docker-compose.yml            # Configuration Docker pour le développement
-└── README.md                     # Ce fichier
-```
 
 ## Scripts disponibles
 

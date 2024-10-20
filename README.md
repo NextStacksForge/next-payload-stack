@@ -60,7 +60,10 @@ Notre projet est divisé en deux applications principales :
    - Utilise le contenu géré par Payload CMS pour générer des pages statiques (SSG)
    - Backend principalement géré avec Supabase et les fonctionnalités de Next.js
    - Inclut Storybook pour le développement de composants
-   - Configuration pour les tests avec Playwright
+   - Configuration pour les tests avec Playwright , Vitest et Testing Librarie
+   - Configuration de Sentry pour les rapports d'erreurs (Prod / Devs)
+   
+   
 
 Cette structure permet une séparation claire des responsabilités :
 - Payload CMS est utilisé exclusivement pour la gestion du contenu des pages statiques.
