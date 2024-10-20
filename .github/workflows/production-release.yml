@@ -8,7 +8,6 @@ on:
 
 jobs:
   generate_git_tag:
-    if: false
     runs-on: ubuntu-latest
     outputs:
       new_tag: ${{ steps.taggerFinal.outputs.new_tag }}
@@ -31,7 +30,6 @@ jobs:
         run: echo "The next tag version will be - ${{ steps.taggerFinal.outputs.new_tag }}"
 
   generate_git_release:
-    if: false
     needs: generate_git_tag
     name: "Github Release"
     runs-on: ubuntu-latest
@@ -46,7 +44,6 @@ jobs:
           token: ${{ secrets.PAT }}
 
   generate_sentry_release:
-    if: false
     needs: [generate_git_tag, generate_git_release]
     name: Sentry Release
     runs-on: ubuntu-latest

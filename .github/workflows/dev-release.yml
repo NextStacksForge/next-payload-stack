@@ -7,7 +7,7 @@ on:
 
 jobs:
   generate_dev_tag:
-    if: false
+    
     runs-on: ubuntu-latest
     outputs:
       new_tag: ${{ steps.taggerDev.outputs.new_tag }}
@@ -29,7 +29,7 @@ jobs:
           PRESET_TYPE: dev
 
   create_github_release:
-    if: false
+    
     needs: generate_dev_tag
     runs-on: ubuntu-latest
     steps:
@@ -95,7 +95,7 @@ jobs:
           token: ${{ secrets.PAT }}
 
   create_dev_sentry_release:
-    if: false
+    
     needs: [generate_dev_tag, create_github_release]
     runs-on: ubuntu-latest
     steps:
