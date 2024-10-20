@@ -7,16 +7,15 @@ on:
 
 jobs:
   generate_dev_tag:
-    
     runs-on: ubuntu-latest
     outputs:
       new_tag: ${{ steps.taggerDev.outputs.new_tag }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Generate Development Version
         id: taggerDev
         uses: anothrNick/github-tag-action@1.39.0
@@ -29,60 +28,13 @@ jobs:
           PRESET_TYPE: dev
 
   create_github_release:
-    
     needs: generate_dev_tag
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-    
-      - name: Generate Detailed Release Notes
-        id: release_notes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          VERSION="${{ needs.generate_dev_tag.outputs.new_tag }}"
-          DATE=$(date +"%Y-%m-%d")
-          REPO="${GITHUB_REPOSITORY}"
-          
-          echo "Generating release notes for version ${VERSION}"
-          echo "RELEASE_NOTES<<EOF" >> $GITHUB_OUTPUT
-          echo "# ${VERSION} (${DATE})" >> $GITHUB_OUTPUT
-          echo "" >> $GITHUB_OUTPUT
-          echo "## Bug Fixes" >> $GITHUB_OUTPUT
-          
-          git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%h %s" | while read -r line; do
-            commit_hash=$(echo $line | cut -d' ' -f1)
-            commit_message=$(echo $line | cut -d' ' -f2-)
-            if [[ $commit_message == Fix:* ]] || [[ $commit_message == fix:* ]]; then
-              issue_number=$(echo $commit_message | grep -oP '#\d+' | head -1)
-              if [ ! -z "$issue_number" ]; then
-                echo "* ${commit_message} ([${issue_number}](https://github.com/${REPO}/issues/${issue_number#\#})) ([${commit_hash}](https://github.com/${REPO}/commit/${commit_hash}))" >> $GITHUB_OUTPUT
-              else
-                echo "* ${commit_message} ([${commit_hash}](https://github.com/${REPO}/commit/${commit_hash}))" >> $GITHUB_OUTPUT
-              fi
-            fi
-          done
-          
-          echo "" >> $GITHUB_OUTPUT
-          echo "## Features" >> $GITHUB_OUTPUT
-          
-          git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%h %s" | while read -r line; do
-            commit_hash=$(echo $line | cut -d' ' -f1)
-            commit_message=$(echo $line | cut -d' ' -f2-)
-            if [[ $commit_message == Feat:* ]] || [[ $commit_message == feat:* ]]; then
-              issue_number=$(echo $commit_message | grep -oP '#\d+' | head -1)
-              if [ ! -z "$issue_number" ]; then
-                echo "* ${commit_message} ([${issue_number}](https://github.com/${REPO}/issues/${issue_number#\#})) ([${commit_hash}](https://github.com/${REPO}/commit/${commit_hash}))" >> $GITHUB_OUTPUT
-              else
-                echo "* ${commit_message} ([${commit_hash}](https://github.com/${REPO}/commit/${commit_hash}))" >> $GITHUB_OUTPUT
-              fi
-            fi
-          done
-          
-          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1.10.0
@@ -95,12 +47,11 @@ jobs:
           token: ${{ secrets.PAT }}
 
   create_dev_sentry_release:
-    
     needs: [generate_dev_tag, create_github_release]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
