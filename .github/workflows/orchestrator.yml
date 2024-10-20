@@ -8,6 +8,6 @@ on:
 
 jobs:
   web_app_tests:
-    uses: ./.github/workflows/playwright.yml@main
+    uses: ./.github/workflows/playwright.yml
     with:
       working-directory: './web-app'
