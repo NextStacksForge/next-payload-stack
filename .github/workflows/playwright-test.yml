@@ -11,7 +11,7 @@ on:
       - 'web-app/**'
 
 jobs:
-  test:
+  test_e2e:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     defaults:
