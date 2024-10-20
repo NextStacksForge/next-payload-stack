@@ -2,13 +2,13 @@ name: Orchestrator
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, devs ]
   pull_request:
     branches: [ main, master ]
 
 jobs:
   web_app_tests:
-    uses: ./web-app/.github/workflows/playwright.yml
+    uses: ./web-app/.github/workflows/playwright.yml@main
     with:
       working-directory: './web-app'
 

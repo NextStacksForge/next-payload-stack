@@ -6,8 +6,6 @@ on:
       working-directory:
         required: true
         type: string
-        default: '.'
-
 jobs:
   test:
     timeout-minutes: 60
