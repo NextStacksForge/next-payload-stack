@@ -1,7 +1,73 @@
+
+# Next-Payload Enterprise Stack
+
+## Structure du projet
+
+```
+NextStacksForge/
+├── .github/
+│   └── workflows/
+├── payload-app/
+│   ├── node_modules/
+│   ├── src/
+│   ├── .env
+│   ├── .env.example
+│   ├── .eslintrc.js
+│   ├── .gitignore
+│   ├── .prettierrc.json
+│   ├── .yarnrc
+│   ├── docker-compose.yml
+│   ├── Dockerfile
+│   ├── next.config.mjs
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── README.md
+│   └── tsconfig.json
+├── web-app/
+│   ├── .next/
+│   ├── .storybook/
+│   ├── node_modules/
+│   ├── src/
+│   ├── tests/
+│   ├── .env.local
+│   ├── .env.sentry-build-plugin
+│   ├── .eslintrc.json
+│   ├── .gitignore
+│   ├── .prettierrc
+│   ├── next-env.d.ts
+│   ├── next.config.mjs
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── playwright.config.ts
+│   └── tsconfig.json
+└── README.md
+```
+
+## Structure de l'application
+
+Notre projet est divisé en deux applications principales :
+
+1. **Application Payload CMS** (dans `payload-app/`) :
+   - Gère le contenu et les données de l'application
+   - Fournit une API RESTful pour l'application frontend
+   - Gère l'authentification et les autorisations
+   - Utilise Docker pour le développement et le déploiement
+
+2. **Application Web Next.js** (dans `web-app/`) :
+   - Utilise l'App Router de Next.js pour un routage optimisé
+   - Interface utilisateur principale de l'application
+   - Intègre Tailwind CSS pour le styling
+   - Communique avec le backend Payload CMS via API
+   - Inclut Storybook pour le développement de composants
+   - Configuration pour les tests avec Playwright
+
+Cette structure permet une séparation claire des responsabilités entre le frontend et le backend, tout en permettant une intégration étroite entre les deux parties de l'application.
+
 # GitHub Actions Workflows
 
 Ce projet utilise GitHub Actions pour automatiser les processus de release et de déploiement. Nous avons deux workflows principaux : un pour la production et un pour le développement.
 
+Actuellement, les workflows GitHub Actions sont désactivés pour ce projet. Les fichiers de configuration des workflows sont présents dans le dossier .github/workflows/, mais ils sont temporairement mis en pause. avec cette ligne `if: false` avant les `jobs: *`
 ## Workflow de Production
 
 Fichier : `.github/workflows/production-release.yml`
@@ -24,7 +90,7 @@ Ce workflow est déclenché lors des pushes et des pull requests sur les branche
 
 ## Workflow de Développement
 
-Fichier : `.github/workflows/devloppement-release.yml`
+Fichier : `.github/workflows/dev-release.yml`
 
 Ce workflow est déclenché uniquement lors des pushes sur la branche `devs`.
 
