@@ -7,34 +7,40 @@ export default defineConfig({
   resolve: {
     alias: {
       ...configuration?.resolve?.alias,
-      test: path.resolve(__dirname, './tests'),
+      test: path.resolve(__dirname, "./tests"),
     },
   },
   test: {
     globals: true,
-    setupFiles: path.resolve(__dirname, 'tests/setup.ts'),
-    exclude: [...defaultExclude, '**/*.next**'],
+    setupFiles: [path.resolve(__dirname, "./tests/setup.ts")],
+    exclude: [...defaultExclude, "**/*.next**",'tests/e2e/**'],
     environmentMatchGlobs: [
-      ['**/*.test.tsx', 'jsdom'],
-      ['**/*.component.test.ts', 'jsdom'],
+      ["**/*.test.tsx", "jsdom"],
+      ["**/*.component.test.ts", "jsdom"],
     ],
-    coverage:{
-      provider: 'v8', // ou 'istanbul' si vous préférez
-      reporter: ['text', 'json', 'html'],
-      include:['src/**/*'],
-      exclude:[
-        'test/**',
-        'vite.*.ts',
-        '**/*.d.ts',
-        '**/*.test.*',
-        '**/*.config.*',
-        '**/snapshot-tests/**',
-        '**/coverage/**',
+    include: [
+      "tests/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}",
+      "src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}",
+    ],
+    
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "json", "html"],
+      include: ["src/**/*"],
+      exclude: [
+        "tests/**",
+        "vite.*.ts",
+        "**/*.d.ts",
+        "**/*.test.*",
+        "**/*.config.*",
+        "**/snapshot-tests/**",
+        "**/coverage/**",
       ],
-      all:true,
+      all: true,
       thresholds: {
-        autoUpdate:true,
-        statements: 3.79,
+        autoUpdate: true,
+        statements: 59.79,
       },
     },
-  }});
+  },
+});

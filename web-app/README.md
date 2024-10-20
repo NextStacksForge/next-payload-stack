@@ -31,16 +31,20 @@ Next-Payload Enterprise Stack est une solution complète et robuste pour le dév
 ## Installation
 
 1. Clonez le repository :
+
    ```
    git clone https://github.com/NextStacksForge/next-payload-enterprise-stack.git
    cd next-payload-enterprise-stack
    ```
 
 2. Installez les dépendances :
+
    ```
    npm install
    ```
+
    ou
+
    ```
    yarn install
    ```
