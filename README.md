@@ -50,8 +50,8 @@ Notre projet est divisé en deux applications principales :
 1. **Application Payload CMS** (dans `payload-app/`) :
    - Gère le contenu et les données de l'application
    - Fournit une API RESTful pour l'application frontend
-   - Gère l'authentification et les autorisations
-   - Utilise Docker pour le développement et le déploiement
+   - Gère l'authentification et les autorisations pour l'acces a payload-app
+
 
 2. **Application Web Next.js** (dans `web-app/`) :
    - Utilise l'App Router de Next.js pour un routage optimisé
@@ -60,6 +60,7 @@ Notre projet est divisé en deux applications principales :
    - Communique avec le backend Payload CMS via API
    - Inclut Storybook pour le développement de composants
    - Configuration pour les tests avec Playwright
+   - Backend gérée avec Supabase
 
 Cette structure permet une séparation claire des responsabilités entre le frontend et le backend, tout en permettant une intégration étroite entre les deux parties de l'application.
 
