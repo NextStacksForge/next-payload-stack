@@ -2,7 +2,7 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [main, master, devs]
+    branches: [main, master]
     paths:
       - 'web-app/**'
   pull_request:
