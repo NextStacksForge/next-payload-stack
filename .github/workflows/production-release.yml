@@ -5,10 +5,12 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+    
 
 jobs:
   generate_git_tag:
     runs-on: ubuntu-latest
+    if: false
     outputs:
       new_tag: ${{ steps.taggerFinal.outputs.new_tag }}
     steps:
@@ -31,6 +33,7 @@ jobs:
 
   generate_git_release:
     needs: generate_git_tag
+    if: false
     name: "Github Release"
     runs-on: ubuntu-latest
     steps:
@@ -45,6 +48,7 @@ jobs:
 
   generate_sentry_release:
     needs: [generate_git_tag, generate_git_release]
+    if: false
     name: Sentry Release
     runs-on: ubuntu-latest
     steps:

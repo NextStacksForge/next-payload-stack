@@ -15,17 +15,26 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
-    "@payloadcms/next": "beta",
-    "@payloadcms/plugin-cloud": "beta",
-    "@payloadcms/richtext-lexical": "beta",
+    "payload": "3.0.0-beta.116",
+    "@payloadcms/next": "3.0.0-beta.116",
+    "@payloadcms/plugin-cloud": "3.0.0-beta.116",
+    "@payloadcms/richtext-lexical": "3.0.0-beta.116",
+    "@payloadcms/db-postgres": "3.0.0-beta.116",
+    "@payloadcms/live-preview-react": "3.0.0-beta.116",
+    "@payloadcms/plugin-cloud-storage": "3.0.0-beta.116",
+    "@payloadcms/plugin-form-builder": "3.0.0-beta.116",
+    "@payloadcms/plugin-nested-docs": "3.0.0-beta.116",
+    "@payloadcms/plugin-redirects": "3.0.0-beta.116",
+    "@payloadcms/plugin-seo": "3.0.0-beta.116",
+    "@payloadcms/storage-s3": "3.0.0-beta.116",
+    "@payloadcms/translations": "3.0.0-beta.116",
+    "@payloadcms/ui": "3.0.0-beta.116",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "next": "15.0.0-canary.173",
-    "payload": "beta",
     "react": "19.0.0-rc-3edc000d-20240926",
     "react-dom": "19.0.0-rc-3edc000d-20240926",
-    "sharp": "0.32.6",
-    "@payloadcms/db-postgres": "beta"
+    "sharp": "0.32.6"
   },
   "devDependencies": {
     "@types/node": "^22.5.4",
