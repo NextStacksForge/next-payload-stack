@@ -1,6 +1,11 @@
 // storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import {
+  FixedToolbarFeature,
+  lexicalEditor,
+  TreeViewFeature,
+  UploadFeature,
+} from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -16,8 +21,7 @@ import { en } from '@payloadcms/translations/languages/en'
 import { fr } from '@payloadcms/translations/languages/fr'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { s3Storage } from '@payloadcms/storage-s3'
-
-
+import { RichTextExemple } from './collections/RichText'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -30,12 +34,15 @@ export default buildConfig({
       password: 'MarieCurie!',
       prefillOnly: true,
     },
-    importMap: {
-      baseDir: path.resolve(dirname),
-    },
   },
-  collections: [Users, Media],
-  editor: lexicalEditor(),
+  collections: [Users, Media, RichTextExemple],
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }: any) => [
+      ...defaultFeatures,
+      FixedToolbarFeature(),
+      TreeViewFeature(),
+    ],
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
