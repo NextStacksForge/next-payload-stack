@@ -38,7 +38,7 @@ const preview: Preview = {
         light: "light",
         dark: "dark",
       },
-      defaultTheme: "light", 
+      defaultTheme: "light",
       attributeName: "data-mode",
     }),
   ],

@@ -7,7 +7,7 @@ Next-Payload Enterprise Stack est une solution complète et robuste pour le dév
 ## Caractéristiques
 
 - **Frontend Next.js** : Utilise l'App Router pour un routage optimisé
-- **Payload CMS** : CMS headless puissant et flexible 
+- **Payload CMS** : CMS headless puissant et flexible
 - **TypeScript** : Typage statique pour un code plus sûr et maintenable
 - **Tailwind CSS** : Utilitaire CSS pour un design rapide et réactif
 - **Stripe** : Intégration pour les paiements en ligne

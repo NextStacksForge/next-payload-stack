@@ -13,7 +13,7 @@ export default defineConfig({
   test: {
     globals: true,
     setupFiles: [path.resolve(__dirname, "./tests/setup.ts")],
-    exclude: [...defaultExclude, "**/*.next**",'tests/e2e/**'],
+    exclude: [...defaultExclude, "**/*.next**", "tests/e2e/**"],
     environmentMatchGlobs: [
       ["**/*.test.tsx", "jsdom"],
       ["**/*.component.test.ts", "jsdom"],
@@ -22,7 +22,6 @@ export default defineConfig({
       "tests/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}",
       "src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}",
     ],
-    
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],
