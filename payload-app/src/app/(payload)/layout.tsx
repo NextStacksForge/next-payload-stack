@@ -6,6 +6,7 @@ import { RootLayout } from '@payloadcms/next/layouts'
 import React from 'react'
 
 import './custom.scss'
+import './globals.css'
 
 type Args = {
   children: React.ReactNode

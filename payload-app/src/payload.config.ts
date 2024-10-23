@@ -22,6 +22,7 @@ import { fr } from '@payloadcms/translations/languages/fr'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { RichTextExemple } from './collections/RichText'
+import { TextStyleFeature } from './fields/feature.server'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -40,6 +41,8 @@ export default buildConfig({
     features: ({ defaultFeatures }: any) => [
       ...defaultFeatures,
       FixedToolbarFeature(),
+      TextStyleFeature(),
+      UploadFeature(),
       TreeViewFeature(),
     ],
   }),
